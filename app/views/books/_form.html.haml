@@ -1,0 +1,20 @@
+= form_for @book, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field'
+  .control-group
+    = f.label :author, :class => 'control-label'
+    .controls
+      = f.text_field :author, :class => 'text_field'
+  .control-group
+    = f.label :description, :class => 'control-label'
+    .controls
+      = f.text_area :description, :class => 'text_area', rows: 10, cols: 30, style: "width: 530px;"
+  .control-group
+    = f.label :country, :class => 'control-label'
+    .controls
+      = f.select :country, Book::COUNTRIES, :class => 'select'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), books_path, :class => 'btn'

@@ -1,0 +1,38 @@
+- model_class = Chapter
+= form_tag search_path, :method => :get, :html => { :class => 'form-vertical' } do |f|
+  .control-group.pull-right{style: 'margin-top: 10px;'}
+    = text_field_tag :search, params[:search], :placeholder => 'Enter search string', :class => 'text_field', style: 'margin-top: 10px;'
+    = submit_tag "Search", class: 'btn btn-success'
+
+- unless @book_results.empty? && params[:search].nil?
+  %h3 Books
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= model_class.human_attribute_name(:book)
+        %th= model_class.human_attribute_name(:author)
+        %th= model_class.human_attribute_name(:description)
+        %th= model_class.human_attribute_name(:country)
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - if @book_results.empty? && params[:search].present?
+        %tr
+          %td{colspan: 4} No matching results
+
+      = render partial: 'book', collection: @book_results
+
+- unless @chapter_results.empty? || params[:search].nil?
+  %h3 Chapters
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= model_class.human_attribute_name(:book)
+        %th= model_class.human_attribute_name(:chapter)
+        %th= model_class.human_attribute_name(:text)
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - if @chapter_results.empty? && params[:search].present?
+        %tr
+          %td{colspan: 4} No matching results
+
+      = render partial: 'chapter', collection: @chapter_results
