@@ -18,7 +18,7 @@ gem 'twitter-bootstrap-rails'
 
 gem 'haml'
 
-gem 'mysql2',          '~> 0.3.13', :platform => :ruby
-gem 'thinking-sphinx', '~> 3.1.1'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 gem "sorcery"

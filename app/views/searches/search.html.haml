@@ -4,7 +4,7 @@
     = text_field_tag :search, params[:search], :placeholder => 'Enter search string', :class => 'text_field', style: 'margin-top: 10px;'
     = submit_tag "Search", class: 'btn btn-success'
 
-- unless @book_results.empty? && params[:search].nil?
+- unless params[:search].nil? || params[:search].blank?
   %h3 Books
   %table.table.table-striped
     %thead
@@ -15,13 +15,13 @@
         %th= model_class.human_attribute_name(:country)
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
-      - if @book_results.empty? && params[:search].present?
+      - if @book_results.results.empty? && params[:search].present?
         %tr
-          %td{colspan: 4} No matching results
+          %td{colspan: 5} No matching results
+      - @book_results.each_hit_with_result do |hit,book|
+        = render partial: 'book', locals: {book: book, hit: hit}
 
-      = render partial: 'book', collection: @book_results
-
-- unless @chapter_results.empty? || params[:search].nil?
+- unless params[:search].nil? || params[:search].blank?
   %h3 Chapters
   %table.table.table-striped
     %thead
@@ -31,8 +31,8 @@
         %th= model_class.human_attribute_name(:text)
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
-      - if @chapter_results.empty? && params[:search].present?
+      - if @chapter_results.results.empty? && params[:search].present?
         %tr
           %td{colspan: 4} No matching results
-
-      = render partial: 'chapter', collection: @chapter_results
+      - @chapter_results.each_hit_with_result do |hit,chapter|
+        = render partial: 'chapter', locals: {chapter: chapter, hit: hit}

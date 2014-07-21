@@ -1,7 +1,11 @@
 %tr
   %td= link_to chapter.book.name, book_path(chapter.book)
   %td= chapter.number
-  %td= link_to @chapter_excerpter.excerpt!(chapter.inner_text).html_safe, book_chapter_path(chapter.book, chapter), class: 'search-result-link'
+  %td
+    = link_to book_chapter_path(chapter.book, chapter), class: 'search-result-link' do
+      = truncate(chapter.inner_text, length: 350, separator: ' ') if hit.highlights(:inner_text).empty?
+      - hit.highlights(:inner_text).each do |text|
+        = "...#{text.format {|word| "<span class='match'>#{word}</span>"}}...".html_safe
   %td
     = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_chapter_path(chapter.book, chapter), :class => 'btn btn-mini'
     = link_to t('.destroy', :default => t("helpers.links.destroy")), book_chapter_path(chapter.book, chapter), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
