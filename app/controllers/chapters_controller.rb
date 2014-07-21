@@ -1,5 +1,6 @@
 class ChaptersController < ApplicationController
 
+  before_filter :require_login, except: [:index, :show]
   before_filter :get_book
   before_filter :get_chapter, only: [:show, :edit, :update, :destroy]
 

@@ -33,12 +33,18 @@
               %li= link_to "Back to Chapters", book_path(params[:book_id]) if (params[:controller] == 'chapters' && params[:action] == 'show')
             %ul.nav.pull-right
               %li= link_to "Search", search_path
+              - if current_user
+                %li= link_to "Log out", logout_path
+              - else
+                %li= link_to "Sign up", register_path
+                %li= link_to "log in", login_path
 
     .container.main-page
-
       .row
         .span9
-          = bootstrap_flash
+          - flash.keys.each do |type|
+            = render partial: 'bootstrap_alert', locals:{message: flash[type.to_sym]}
+
           = yield
     
       %footer

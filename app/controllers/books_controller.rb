@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
 
+  before_filter :require_login, except: [:index, :show]
   before_filter :get_book, only: [:show, :edit, :update, :destroy]
 
   def index
