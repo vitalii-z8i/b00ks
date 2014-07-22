@@ -12,13 +12,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
-gem "therubyracer"
-gem "less-rails"
+gem 'therubyracer'
+gem 'less-rails'
 gem 'twitter-bootstrap-rails'
-
 gem 'haml'
+gem 'sorcery'
 
-gem 'mysql2',          '~> 0.3.13', :platform => :ruby
-gem 'thinking-sphinx', '~> 3.1.1'
-
-gem "sorcery"
+gem 'xapian_db'
