@@ -17,7 +17,7 @@
     %tbody
       - if @book_results.empty? && params[:search].present?
         %tr
-          %td{colspan: 4} No matching results
+          %td{colspan: 5} No matching results
 
       = render partial: 'book', collection: @book_results
 

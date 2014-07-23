@@ -18,4 +18,5 @@ gem 'twitter-bootstrap-rails'
 gem 'haml'
 gem 'sorcery'
 
-gem 'xapian_db'
+gem 'xapian-fu'
+gem 'xapian-ruby'
